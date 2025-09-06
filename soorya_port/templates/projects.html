@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects - Soorya J</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow-x: hidden;
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: white;
+    }
+    #canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      filter: blur(0.5px) brightness(1.2);
+    }
+    section {
+      padding: 60px 20px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .card {
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      background: rgba(255, 255, 255, 0.3); /* Semi-transparent white */
+      backdrop-filter: blur(5px); /* Subtle blur for glass effect */
+      border: 1px solid rgba(0, 255, 204, 0.5); /* Cyan border */
+      perspective: 1000px; /* Enable 3D perspective */
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 255, 204, 0.7);
+    }
+    .card-body {
+      transform-style: preserve-3d; /* Enable 3D transforms */
+      transition: transform 0.3s ease;
+    }
+    .card h5, .card p {
+      color: #e0f7fa; /* Light cyan for readability */
+      text-shadow: 0 0 8px rgba(0, 255, 204, 0.7); /* Cyan glow */
+    }
+    .blink-btn {
+      background: #0d6efd;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      animation: blinkGlow 1.5s infinite alternate;
+      transition: all 0.3s ease-in-out;
+    }
+    @keyframes blinkGlow {
+      0% {
+        box-shadow: 0 0 5px #0d6efd, 0 0 10px #0d6efd;
+        opacity: 1;
+      }
+      50% {
+        box-shadow: 0 0 20px #0d6efd, 0 0 40px #00f, 0 0 60px #00f;
+        opacity: 0.7;
+      }
+      100% {
+        box-shadow: 0 0 10px #0d6efd, 0 0 30px #0d6efd, 0 0 50px #00f;
+        opacity: 1;
+      }
+    }
+    .blink-btn:hover {
+      transform: scale(1.1);
+      animation: blinkGlow 0.7s infinite alternate;
+    }
+    .btn-primary {
+      background: rgba(0, 255, 204, 0.8); /* Cyan background */
+      border: 1px solid #00ffcc;
+      color: white;
+      box-shadow: 0 0 5px rgba(0, 255, 204, 0.5);
+      transition: all 0.3s ease-in-out;
+      font-weight: bold;
+      border-radius: 25px;
+    }
+    .btn-primary:hover {
+      background: rgba(0, 255, 204, 1);
+      box-shadow: 0 0 10px #0d6efd, 0 0 20px #00ffcc;
+      transform: scale(1.05);
+    }
+    footer {
+      background: #f8f9fa;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #e0f7fa; /* Light cyan for consistency */
+      text-shadow: 0 0 8px rgba(0, 255, 204, 0.7), 0 0 12px rgba(13, 110, 253, 0.5); /* Cyan and blue glow */
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+
+  <!-- Navigation -->
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">Soorya J</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/projects">Projects</a></li>
+            <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="/resume">Resume</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+  <section class="container mt-4" data-aos="fade-up">
+    <h1 class="mb-4">Projects</h1>
+    <div class="row">
+      <!-- Project 1 -->
+      <div class="col-md-4">
+        <div class="card shadow-sm mb-4 animate__animated animate__flipInY" data-aos="flip-left">
+          <div class="card-body">
+            <h5 class="card-title">Bitcoin Price Prediction</h5>
+            <p class="card-text">A machine learning project using XGBoost to forecast Bitcoin prices with live data integration.</p>
+            <a href="https://github.com/sooya08" target="_blank" class="btn btn-primary btn-sm">View on GitHub</a>
+          </div>
+        </div>
+      </div>
+      <!-- Project 2 -->
+      <div class="col-md-4">
+        <div class="card shadow-sm mb-4 animate__animated animate__flipInY" data-aos="flip-left">
+          <div class="card-body">
+            <h5 class="card-title">Faculty Publication Tracker</h5>
+            <p class="card-text">A web-based tool built with Flask and MySQL to manage and track faculty research publications.</p>
+            <a href="https://github.com/sooya08" target="_blank" class="btn btn-primary btn-sm">View on GitHub</a>
+          </div>
+        </div>
+      </div>
+      <!-- Project 3 -->
+      <div class="col-md-4">
+        <div class="card shadow-sm mb-4 animate__animated animate__flipInY" data-aos="flip-left">
+          <div class="card-body">
+            <h5 class="card-title">Amazon Product View Prediction</h5>
+            <p class="card-text">A data science project predicting product view patterns using Python, Pandas, and ML models.</p>
+            <a href="https://github.com/sooya08" target="_blank" class="btn btn-primary btn-sm">View on GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3 mt-5">
+    <div class="container">
+      <p class="mb-1">© 2025 Soorya J. All rights reserved.</p>
+      <p class="mb-0">
+        <a href="https://github.com/sooya08" target="_blank" class="text-white me-3">GitHub</a>
+        <a href="https://www.linkedin.com/in/soorya-soorya-a3a8a72a7" target="_blank" class="text-white">LinkedIn</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS JS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 1200,
+      once: true
+    });
+
+    // Three.js Particle Background and Animations
+    document.addEventListener('DOMContentLoaded', function() {
+      const canvas = document.getElementById('canvas');
+      if (!canvas || typeof THREE === 'undefined') return;
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+
+      // Particle system
+      const particleCount = 1000;
+      const particles = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      const velocities = new Float32Array(particleCount * 3);
+      for (let i = 0; i < particleCount; i++) {
+        positions[i * 3] = (Math.random() - 0.5) * 100;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 100;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 100;
+        velocities[i * 3] = (Math.random() - 0.5) * 0.01;
+        velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.01;
+        velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.01;
+      }
+      particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      const particleMaterial = new THREE.PointsMaterial({
+        color: 0x00ffcc,
+        size: 0.2,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending
+      });
+      const particleSystem = new THREE.Points(particles, particleMaterial);
+      scene.add(particleSystem);
+      camera.position.z = 50;
+
+      // Mouse interaction
+      let mouseX = 0, mouseY = 0;
+      document.addEventListener('mousemove', (event) => {
+        mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+        mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+      });
+
+      // Animation loop
+      function animate() {
+        requestAnimationFrame(animate);
+        const positions = particleSystem.geometry.attributes.position.array;
+        for (let i = 0; i < particleCount * 3; i += 3) {
+          positions[i] += velocities[i];
+          positions[i + 1] += velocities[i + 1];
+          positions[i + 2] += velocities[i + 2];
+          const dx = positions[i] - mouseX * 50;
+          const dy = positions[i + 1] - mouseY * 50;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < 10) {
+            velocities[i] += dx * 0.001;
+            velocities[i + 1] += dy * 0.001;
+          }
+          if (Math.abs(positions[i]) > 50) velocities[i] *= -1;
+          if (Math.abs(positions[i + 1]) > 50) velocities[i + 1] *= -1;
+          if (Math.abs(positions[i + 2]) > 50) velocities[i + 2] *= -1;
+        }
+        particleSystem.geometry.attributes.position.needsUpdate = true;
+        particleSystem.rotation.y += 0.001;
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+      });
+
+      // Section fade-in animations
+      const sections = document.querySelectorAll('section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+      sections.forEach(section => observer.observe(section));
+
+      // 3D tilt effect for cards
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        const cardBody = card.querySelector('.card-body');
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          const rotateX = y / rect.height * 20; // Max 20 degrees tilt
+          const rotateY = -x / rect.width * 20;
+          cardBody.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          cardBody.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
