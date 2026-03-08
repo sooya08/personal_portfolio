@@ -8,9 +8,16 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
+    /* Custom Neon Scrollbar */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #050505; }
+    ::-webkit-scrollbar-thumb { background: #0d6efd; border-radius: 5px; border: 2px solid #050505; }
+    ::-webkit-scrollbar-thumb:hover { background: #00ffcc; box-shadow: 0 0 10px #00ffcc; }
+
     body { 
-      font-family: Arial, sans-serif; 
+      font-family: 'Outfit', sans-serif; 
       position: relative;
       overflow-x: hidden;
       background: linear-gradient(-45deg, #0d6efd, #6610f2, #6f42c1, #20c997);
@@ -42,16 +49,18 @@
       transform: translateY(0);
     }
     .card { 
-      border-radius: 12px; 
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1); 
-      transition: transform 0.3s, box-shadow 0.3s;
-      background: rgba(255, 255, 255, 0.3); /* Semi-transparent white */
-      backdrop-filter: blur(5px); /* Subtle blur for glass effect */
-      border: 1px solid rgba(0, 255, 204, 0.5); /* Cyan border */
+      border-radius: 16px; 
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
+      background: rgba(255, 255, 255, 0.05); /* Semi-transparent white */
+      backdrop-filter: blur(12px); /* Stronger blur for glass effect */
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle white border */
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(0, 255, 204, 0.7);
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: 0 15px 35px rgba(13, 110, 253, 0.4), 0 0 20px rgba(0, 255, 204, 0.3);
+      border: 1px solid rgba(0, 255, 204, 0.5);
     }
     .card h4, .card h5, .card p, .card li {
       color: white; /* White text for readability */
@@ -81,6 +90,66 @@
       color: white;
       text-shadow: 0 0 5px #0d6efd, 0 0 10px #0d6efd;
     }
+    .nav-link {
+      position: relative;
+      font-weight: bold;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    }
+    .nav-link:hover {
+      color: #00ffcc !important;
+      text-shadow: 0 0 10px rgba(0, 255, 204, 0.8);
+      transform: scale(1.1);
+    }
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 10mm;
+      }
+      body {
+        background: white !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      /* Hide unnecessary elements entirely from layout to fix extra blank spaces */
+      nav, footer, canvas, h2.text-center, .d-print-none {
+        display: none !important;
+      }
+      .section {
+        padding: 0 !important;
+        margin: 0 !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
+      .card {
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      #resume-content, #resume-content * {
+        color: black !important;
+        text-shadow: none !important;
+        visibility: visible !important;
+      }
+      #resume-content {
+        width: 100% !important;
+      }
+      /* Tighten spacing and sizes to ensure 1-page fit */
+      #resume-content h4 { font-size: 1.6rem !important; margin-bottom: 4px !important; }
+      #resume-content h5 { font-size: 1.1rem !important; margin-top: 14px !important; margin-bottom: 6px !important; }
+      #resume-content h6 { font-size: 1.0rem !important; margin-bottom: 2px !important; }
+      #resume-content p { font-size: 0.95rem !important; margin-bottom: 6px !important; line-height: 1.4 !important; }
+      #resume-content ul { margin-bottom: 6px !important; padding-left: 20px !important; }
+      #resume-content li { font-size: 0.95rem !important; margin-bottom: 2px !important; line-height: 1.4 !important; }
+      #resume-content hr { margin: 8px 0 !important; border-color: #333 !important; }
+      #resume-content a.text-info {
+        color: #0d6efd !important;
+        text-decoration: none !important;
+      }
+      .mb-3 { margin-bottom: 8px !important; }
+      .mt-4 { margin-top: 12px !important; }
+    }
   </style>
 </head>
 <body>
@@ -106,30 +175,82 @@
 
   <!-- Resume Section -->
   <div class="section container" data-aos="fade-up">
-    <h2 class="text-center mb-4">My Resume</h2>
-    <div class="card p-4 animate__animated animate__fadeInUp" data-aos="fade-up">
-      <h4>Soorya J</h4>
-      <p><b>B.Sc. Computer Science | Final Year Student</b></p>
-      <hr>
-      <h5>Summary</h5>
-      <p>
-        A passionate Computer Science student skilled in <b>Web Development</b> and 
-        <b>Machine Learning</b>, with hands-on experience in building real-world projects such as 
-        Bitcoin Price Prediction, Faculty Publication Tracker, and Amazon Product View Prediction. 
-        Strong foundation in <b>HTML, CSS, Java, Python, C, C++, MySQL</b>, and frameworks like <b>Flask & Bootstrap</b>.  
-        Excellent problem-solving skills and a team worker eager to contribute to innovative projects.
-      </p>
-      <h5>Skills</h5>
-      <ul>
-        <li>Frontend: HTML, CSS, Bootstrap</li>
-        <li>Backend: Python (Flask), Java, C, C++</li>
-        <li>Database: MySQL</li>
-        <li>Version Control: GitHub</li>
-        <li>Core: Problem Solving, Teamwork, Logical Thinking</li>
-      </ul>
-      <h5>Resume File</h5>
-      <a href="resume.pdf" class="btn btn-primary" download>📥 Download My Resume</a>
-      <p class="mt-2"><i>(Add your <b>resume.pdf</b> file in the same folder)</i></p>
+    <h2 class="text-center mb-4 text-white">My Resume</h2>
+    <div class="card p-4 animate__animated animate__fadeInUp" id="resume-container" data-aos="fade-up">
+      <div id="resume-content">
+        <h4 class="mb-1 text-center" style="font-weight: bold; font-size: 1.8rem;">J. SOORYA</h4>
+        <p class="mb-2 text-center"><b>Aspiring Software Engineer</b><br>
+        Karaikudi, Tamil Nadu | +91 93618 16676 | <a href="mailto:sooryas851@gmail.com" class="text-info text-decoration-none">sooryas851@gmail.com</a><br>
+        GitHub: <a href="https://github.com/sooya08" target="_blank" class="text-info text-decoration-none">github.com/sooya08</a> | LinkedIn: <a href="https://linkedin.com/in/soorya-soorya-a3a8a72a7" target="_blank" class="text-info text-decoration-none">linkedin.com/in/soorya-soorya-a3a8a72a7</a></p>
+        <hr>
+        
+        <h5 class="mt-4 fw-bold">PROFESSIONAL SUMMARY</h5>
+        <p>Detail-oriented Computer Science undergraduate with strong foundations in software development, backend systems, and web technologies. Hands-on experience in Python, Flask, MySQL, and machine learning projects with proven ability to build scalable, data-driven applications.</p>
+        
+        <h5 class="mt-4 fw-bold">TECHNICAL SKILLS</h5>
+        <ul>
+          <li><b>Programming Languages:</b> Python, Java, C, C++</li>
+          <li><b>Web Technologies:</b> HTML5, CSS3, Bootstrap, JavaScript</li>
+          <li><b>Backend Frameworks:</b> Flask</li>
+          <li><b>Databases:</b> MySQL, SQLite</li>
+          <li><b>Tools & Platforms:</b> Git, GitHub, VS Code, Hugging Face Spaces</li>
+        </ul>
+
+        <h5 class="mt-4 fw-bold">PROJECTS</h5>
+        
+        <div class="mb-3">
+          <h6 class="fw-bold mb-1">AirGuardian – Air Quality Monitoring & Prediction System</h6>
+          <ul>
+            <li>Developed a machine learning application to predict AQI with 85% accuracy using Linear Regression and Random Forest.</li>
+            <li>Performed data preprocessing, feature engineering, and model evaluation (RMSE, MAE, R²).</li>
+            <li>Deployed scalable ML model on Hugging Face Spaces for real-time prediction.</li>
+          </ul>
+        </div>
+        
+        <div class="mb-3">
+          <h6 class="fw-bold mb-1">Faculty Publication Tracker</h6>
+          <ul>
+            <li>Designed and developed a full-stack web application to manage 500+ publication records.</li>
+            <li>Implemented CRUD operations, authentication, and MySQL database integration using Flask.</li>
+          </ul>
+        </div>
+        
+        <div class="mb-3">
+          <h6 class="fw-bold mb-1">Personal Portfolio Website</h6>
+          <ul>
+            <li>Built a responsive portfolio website to showcase technical projects and skills.</li>
+            <li>Optimized UI/UX using Bootstrap and JavaScript; deployed via GitHub Pages.</li>
+          </ul>
+        </div>
+
+        <h5 class="mt-4 fw-bold">INTERNSHIP</h5>
+        <div class="mb-3">
+          <h6 class="fw-bold mb-1">Web Development Intern – DigiDARA Technologies Pvt. Ltd.</h6>
+          <ul>
+            <li>Developed responsive frontend components using HTML, CSS, and Bootstrap.</li>
+            <li>Assisted backend logic implementation and testing using Python.</li>
+          </ul>
+        </div>
+
+        <h5 class="mt-4 fw-bold">EDUCATION</h5>
+        <p><b>B.Sc. Computer Science</b> – Alagappa Government Arts College, Karaikudi<br>
+        2023 – 2026 (Expected) | Percentage: 71%</p>
+
+        <h5 class="mt-4 fw-bold">CERTIFICATIONS</h5>
+        <ul>
+          <li>Web Development – DigiDARA</li>
+          <li>Oracle Database – Naan Mudhalvan</li>
+          <li>Java Spring – Naan Mudhalvan</li>
+          <li>Python Foundations – Naan Mudhalvan</li>
+        </ul>
+
+        <h5 class="mt-4 fw-bold">LANGUAGES</h5>
+        <p>Tamil, English</p>
+      </div>
+
+      <h5 class="mt-4 border-top pt-3 d-print-none text-white">Resume Actions</h5>
+      <button onclick="window.print()" class="btn btn-primary d-print-none">📥 Download / Print My Resume</button>
+      <p class="mt-2 text-white-50 d-print-none" style="font-size: 0.9em;"><i>(Clicking the button will open a printable/downloadable PDF view)</i></p>
     </div>
   </div>
 

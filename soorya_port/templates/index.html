@@ -7,15 +7,25 @@
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts: Outfit -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <!-- Three.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Typed.js -->
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
 
   <style>
+    /* Custom Neon Scrollbar */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #050505; }
+    ::-webkit-scrollbar-thumb { background: #0d6efd; border-radius: 5px; border: 2px solid #050505; }
+    ::-webkit-scrollbar-thumb:hover { background: #00ffcc; box-shadow: 0 0 10px #00ffcc; }
+
     body, html {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Outfit', sans-serif;
       overflow-x: hidden;
       height: 100%;
       width: 100%;
@@ -49,10 +59,12 @@
     .nav-link {
       position: relative;
       font-weight: bold;
-      transition: all 0.3s ease-in-out;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .nav-link:hover {
-      /* No glow effect */
+      color: #00ffcc !important;
+      text-shadow: 0 0 10px rgba(0, 255, 204, 0.8);
+      transform: scale(1.1);
     }
 
     /* Hero Section */
@@ -93,17 +105,21 @@
       background-color: rgba(255, 255, 255, 0) !important; /* fully transparent */
     }
     .card {
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      background: rgba(0,0,0,0.5);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       color: white;
       padding: 20px;
       margin-bottom: 20px;
-      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 20px #0d6efd, 0 0 40px #00f;
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(13, 110, 253, 0.4), 0 0 20px rgba(0, 255, 204, 0.3);
+      border: 1px solid rgba(0, 255, 204, 0.5);
     }
 
     /* Footer */
@@ -142,7 +158,7 @@
     <section id="hero" class="hero">
       <img src="{{ url_for('static', filename='soorya.jpg') }}" alt="Soorya J" class="hero-img">
       <h1>Hello, I'm Soorya J</h1>
-      <h4>B.Sc. Computer Science | Web Developer | Data Science Enthusiast</h4>
+      <h4>B.Sc. Computer Science | <span id="typing-text" style="color: #00ffcc;"></span></h4>
       <p>Passionate about coding, solving problems, and creating impactful projects.</p>
     </section>
 
@@ -150,11 +166,7 @@
     <section class="section" id="about">
       <h2>About Me</h2>
       <p>
-        I am Soorya J, a final-year B.Sc. Computer Science student with a strong passion for 
-        <b>Web Development</b> and <b>Artificial Intelligence</b>. 
-        I enjoy creating dynamic web applications using Flask, MySQL, and Bootstrap, while also 
-        exploring Machine Learning projects like price prediction and evaluation systems. 
-        I am a fast learner, team worker, and problem solver.
+        I am a detail-oriented Computer Science undergraduate with strong foundations in software development, backend systems, and web technologies. Hands-on experience in Python, Flask, MySQL, and machine learning projects with proven ability to build scalable, data-driven applications.
       </p>
     </section>
 
@@ -166,17 +178,18 @@
           <div class="col-md-6">
             <h5 style="color:white;">💻 Technical Skills</h5>
             <ul style="color:white;">
-              <li>HTML, CSS, Bootstrap</li>
-              <li>Java, Python, C, C++</li>
-              <li>MySQL, GitHub</li>
+              <li>Python, Java, C, C++</li>
+              <li>HTML5, CSS3, Bootstrap, JavaScript</li>
+              <li>Flask, MySQL, SQLite</li>
+              <li>Git, GitHub, Hugging Face Spaces</li>
             </ul>
           </div>
           <div class="col-md-6">
-            <h5 style="color:white;">🧠 Core Skills</h5>
+            <h5 style="color:white;">🧠 Soft Skills</h5>
             <ul style="color:white;">
               <li>Problem Solving</li>
               <li>Logical Thinking</li>
-              <li>Team Worker</li>
+              <li>Team Collaboration</li>
             </ul>
           </div>
         </div>
@@ -259,6 +272,17 @@
         });
     }, { threshold: 0.1 });
     sections.forEach(section => observer.observe(section));
+
+    // Typing Animation
+    if (typeof Typed !== 'undefined') {
+      new Typed('#typing-text', {
+        strings: ['Web Developer', 'Java Programmer', 'Machine Learning Explorer', 'Problem Solver'],
+        typeSpeed: 60,
+        backSpeed: 40,
+        backDelay: 1500,
+        loop: true
+      });
+    }
   </script>
 </body>
 </html>
